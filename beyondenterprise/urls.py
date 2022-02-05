@@ -15,11 +15,19 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from django.conf.urls.i18n import i18n_patterns
+from django.utils.translation import gettext_lazy as _
 
-urlpatterns = [
+urlpatterns = i18n_patterns(
+    # ...
     path('admin/', admin.site.urls),
-]
+    # ...
+ 
+    # If no prefix is given, use the default language
+    prefix_default_language=False
+)
 
 admin.site.site_header = 'Beyond Enterprise'                    # default: "Django Administration"
 admin.site.index_title = 'Beyond Enterprise'                 # default: "Site administration"
-admin.site.site_title = 'Beyond Enterprise Admin' # default: "Django site admin"
+admin.site.site_title = _('My Site Management') # default: "Django site admin"
+

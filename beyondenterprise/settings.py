@@ -11,6 +11,8 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
 from pathlib import Path
+import os
+from django.utils.translation import gettext_lazy as _
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -24,6 +26,15 @@ SECRET_KEY = 'django-insecure-nsq6tgov93k0(6cvmzf)!^^@n$=skr*&@z#yr5d)z-j8@l#*ql
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
+
+LOCALE_PATHS = [os.path.join(BASE_DIR, 'locale')]
+
+LANGUAGES = [
+    ('en', _('English')),
+    ('pt-br', _('Portuguese')),
+    ('fr', _('French')),
+    ('es', _('Spanish')),
+]
 
 ALLOWED_HOSTS = []
 
@@ -48,6 +59,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django.middleware.locale.LocaleMiddleware',
 ]
 
 ROOT_URLCONF = 'beyondenterprise.urls'
@@ -104,7 +116,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/3.2/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'en'
 
 TIME_ZONE = 'UTC'
 
