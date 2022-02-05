@@ -6,10 +6,18 @@ class ClientCategory(models.Model):
     def __str__(self):
         return self.category_name
 
-class Client(models.Model):
-    first_name = models.CharField(max_length=100, verbose_name="First Name")
-    last_name = models.CharField(max_length=100, verbose_name="Last Name")
-    client_category = models.ForeignKey(ClientCategory, on_delete=models.CASCADE, verbose_name="Category")
+class ClientType(models.Model):
+    client_type = models.CharField(max_length=50, verbose_name="Client Type")
 
     def __str__(self):
-        return self.first_name + " " + self.last_name
+        return self.client_type
+
+class Client(models.Model):
+    company_name = models.CharField(max_length=100, verbose_name="Company Name")
+    first_name = models.CharField(max_length=100, verbose_name="Main contact First Name")
+    last_name = models.CharField(max_length=100, verbose_name="Main Contact Last Name")
+    client_category = models.ForeignKey(ClientCategory, on_delete=models.CASCADE, verbose_name="Industry")
+    client_type = models.ForeignKey(ClientType, on_delete=models.CASCADE, verbose_name="Type", null = True)
+
+    def __str__(self):
+        return self.company_name
